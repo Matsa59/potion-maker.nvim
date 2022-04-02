@@ -1,0 +1,13 @@
+================================================================================
+                                                             *potion-maker.nvim*
+
+Potion-maker is a plugin to boost productivity on elixir.
+
+To find out more:
+https://github.com/Matsa59/potion-maker.nvim
+
+  :h PotionMakerHelloWorld
+
+PotionMakerHelloWorld                                          *AlphaHelloWorld*
+    Just say "Hello world!!"
+================================================================================
