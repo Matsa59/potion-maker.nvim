@@ -1,0 +1,4 @@
+potion-maker.nvim	potion-maker.txt	/*potion-maker.nvim*
+potion_maker.get_toggle_test_file()	potion-maker.txt	/*potion_maker.get_toggle_test_file()*
+potion_maker.is_test_file()	potion-maker.txt	/*potion_maker.is_test_file()*
+potion_maker.toggle_test_file	potion-maker.txt	/*potion_maker.toggle_test_file*

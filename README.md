@@ -6,8 +6,8 @@ Be an alchemist on vim.
 
 ### Using Packer
 
-```
-	use { 'Matsa59/potion-maker.nvim' }
+```lua
+use { 'Matsa59/potion-maker.nvim' }
 ```
 
 ### Bindings
