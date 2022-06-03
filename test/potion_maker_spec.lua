@@ -1,0 +1,43 @@
+describe('is_test_file', function()
+  it('detects test file in lib', function()
+    local is_file_test = require'potion-maker'.is_test_file('test/app/something_test.exs')
+    assert.equal(true, is_file_test)
+  end)
+
+  it('detects test file in umbrella', function()
+    local is_file_test = require'potion-maker'.is_test_file('apps/my_app/test/my_app/something_test.exs')
+    assert.equal(true, is_file_test)
+  end)
+
+  it('detect src file in lib', function()
+    local is_file_test = require'potion-maker'.is_test_file('lib/app/something.ex')
+    assert.equal(false, is_file_test)
+  end)
+
+  it('detects src file in umbrella', function()
+    local is_file_test = require'potion-maker'.is_test_file('apps/my_app/lib/my_app/something.ex')
+    assert.equal(false, is_file_test)
+  end)
+end)
+
+describe('get_toggle_test_file', function()
+  it('returns src file for lib', function()
+    local toggled_file = require'potion-maker'.get_toggle_test_file('test/app/something_test.exs')
+    assert.equal('lib/app/something.ex', toggled_file)
+  end)
+
+  it('returns src file in umbrella', function()
+    local toggled_file = require'potion-maker'.get_toggle_test_file('apps/my_app/test/my_app/something_test.exs')
+    assert.equal('apps/my_app/lib/my_app/something.ex', toggled_file)
+  end)
+
+  it('detect test file in lib', function()
+    local toggled_file = require'potion-maker'.get_toggle_test_file('lib/my_app/something.ex')
+    assert.equal('test/my_app/something_test.exs', toggled_file)
+  end)
+
+  it('detects test file in umbrella', function()
+    local toggled_file = require'potion-maker'.get_toggle_test_file('apps/my_app/lib/my_app/something.ex')
+    assert.equal('apps/my_app/test/my_app/something_test.exs', toggled_file)
+  end)
+end)
