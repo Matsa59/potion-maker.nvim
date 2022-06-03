@@ -8,7 +8,7 @@ local is_umbrella = function(file_path)
   return string.find(file_path, '^apps/') ~= nil
 end
 
-local is_test_file = function(file_path)
+M.is_test_file = function(file_path)
   local regex_expr
 
   if is_umbrella(file_path) then
@@ -31,7 +31,7 @@ M.get_toggle_test_file = function(file_path)
     replace = ""
   end
 
-  local is_a_test_file = is_test_file(file_path)
+  local is_a_test_file = M.is_test_file(file_path)
 
   if is_a_test_file then
     base_expression = base_expression .. 'test'

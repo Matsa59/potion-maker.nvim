@@ -7,8 +7,11 @@ Be an alchemist on vim.
 ### Using Packer
 
 ```
-	use {
-    'Matsa59/potion-maker.nvim',
-    ft = { "elixir" }
-  }
+	use { 'Matsa59/potion-maker.nvim' }
+```
+
+### Bindings
+
+```vim
+nmap <leader>mtt :PotionMakerToggleTestFile<CR>
 ```

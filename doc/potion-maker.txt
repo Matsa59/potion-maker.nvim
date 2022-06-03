@@ -1,0 +1,41 @@
+===============================================================================
+                                                           *potion-maker.nvim*
+
+This plugin helps you in your day to day using elixir.
+
+                                                 *potion_maker.is_test_file()*
+
+potion_maker.is_test_file({file_path})
+
+  Returns if the module in the file path {file_path} is an elixir test or not.
+  It's a regex apply on the file path.
+>
+  potion_maker.is_test_file('lib/my_app.ex')         -- false
+  potion_maker.is_test_file('test/my_app_test.exs')  -- true
+<
+
+                                           *potion_maker.get_toggle_test_file()*
+
+potion_maker.get_toggle_test_file({file_path})
+
+  Returns the associated test/src file of the module at the given {file_path}.
+  It used |potion_maker.is_test_file()| to determined if the specified
+  {file_path} is a test or not.
+>
+  potion_maker.get_toggle_test_file('lib/my_app.ex')
+  -- 'test/my_app_test.exs'
+
+  potion_maker.get_toggle_test_file('test/my_app_test.exs')
+  -- 'lib/my_app.exs'
+<
+                                               *potion_maker.toggle_test_file*
+potion_maker.toggle_test_file()
+
+  Switch between source test file. It created folders if needed.
+
+  See |potion_maker.get_toggle_test_file()| for more information.
+>
+  potion_maker.toggle_test_file()
+<
+
+vim:tw=78:ts=8:ft=help:norl:
