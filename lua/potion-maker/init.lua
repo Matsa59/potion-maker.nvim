@@ -1,5 +1,9 @@
 local M = {}
 
+M._state = {
+  mix_test_win = nil
+}
+
 local get_current_file_path = function()
   return vim.api.nvim_exec(':echo expand("%p")', true)
 end
@@ -85,6 +89,45 @@ M.toggle_test_file = function()
       vim.cmd('silent :w')
     end
   end
+end
+
+local execute_test = function(arg)
+  if M._state.mix_test_win ~= nil and vim.fn.win_id2win(M._state.mix_test_win) ~= 0 then
+    local winPos = vim.fn.win_id2win(M._state.mix_test_win)
+    vim.cmd('silent exec ' .. winPos .. ".'wincmd c'")
+  end
+
+  vim.cmd('vsplit')
+  vim.cmd(':term mix test ' .. arg)
+  local buf = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_option(buf, 'readonly', true)
+  vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<CMD>close<CR>', {})
+  vim.api.nvim_buf_set_keymap(buf, 'n', 'i', '', {})
+  M._state.mix_test_win = vim.fn.win_getid()
+end
+
+M.run_test_at_cursor = function()
+  local current_file = get_current_file_path()
+
+  if M.is_test_file(current_file) == false then
+    vim.cmd('echo "Not a test file."')
+    return
+  end
+
+  local current_line = vim.fn.line('.')
+
+  execute_test(current_file .. ':' .. current_line)
+end
+
+M.run_test_for_current_file = function()
+  local current_file = get_current_file_path()
+
+  if M.is_test_file(current_file) == false then
+    vim.cmd('echo "Not a test file."')
+    return
+  end
+
+  execute_test(current_file)
 end
 
 return M

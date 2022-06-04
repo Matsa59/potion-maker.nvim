@@ -14,4 +14,6 @@ use { 'Matsa59/potion-maker.nvim' }
 
 ```vim
 nmap <leader>mtt :PotionMakerToggleTestFile<CR>
+nmap <leader>mts :PotionMakerExecuteTestAtCursor<CR>
+nmap <leader>mtS :PotionMakerExecuteTestForCurrentFile<CR>
 ```
