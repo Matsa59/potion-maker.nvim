@@ -92,9 +92,9 @@ M.toggle_test_file = function()
 end
 
 local execute_test = function(arg)
-  if M._state.mix_test_win ~= nil and vim.fn.win_id2win(M._state.mix_test_win) ~= 0 then
-    local winPos = vim.fn.win_id2win(M._state.mix_test_win)
-    vim.cmd('silent exec ' .. winPos .. ".'wincmd c'")
+  if M._state.mix_test_win ~= nil then
+    vim.api.nvim_set_current_win(M._state.mix_test_win)
+    vim.cmd('silent :bdelete!')
   end
 
   vim.cmd('vsplit')
