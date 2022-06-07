@@ -80,7 +80,7 @@ M.toggle_test_file = function()
   if file_exists(toggled_file) then
     vim.cmd(':e ' .. toggled_file, false)
   else
-    local msg = "File doesn't exist. Do you want to create it?"
+    local msg = "File doesn't exist. Do you want to '" .. toggled_file .. "'?"
     local response = vim.fn.confirm(msg, '&y\n&n', 1)
 
     if response == 1 then
@@ -101,7 +101,7 @@ local execute_test = function(arg)
   vim.cmd(':term mix test ' .. arg)
   local buf = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_option(buf, 'readonly', true)
-  vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<CMD>close<CR>', {})
+  vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<CMD>:bdelete<CR>', {})
   vim.api.nvim_buf_set_keymap(buf, 'n', 'i', '', {})
   M._state.mix_test_win = vim.fn.win_getid()
 end

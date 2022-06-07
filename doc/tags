@@ -1,4 +1,5 @@
+get_toggle_test_file()	potion-maker.txt	/*get_toggle_test_file()*
+is_test_file()	potion-maker.txt	/*is_test_file()*
 potion-maker.nvim	potion-maker.txt	/*potion-maker.nvim*
-potion_maker.get_toggle_test_file()	potion-maker.txt	/*potion_maker.get_toggle_test_file()*
-potion_maker.is_test_file()	potion-maker.txt	/*potion_maker.is_test_file()*
-potion_maker.toggle_test_file	potion-maker.txt	/*potion_maker.toggle_test_file*
+run_test_at_cursor	potion-maker.txt	/*run_test_at_cursor*
+toggle_test_file	potion-maker.txt	/*toggle_test_file*
