@@ -4,6 +4,12 @@ Be an alchemist on vim.
 
 ## Intallation
 
+### Using Lazy
+
+```lua
+'Matsa59/potion-maker.nvim'
+```
+
 ### Using Packer
 
 ```lua

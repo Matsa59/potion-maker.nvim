@@ -78,21 +78,22 @@ M.toggle_test_file = function()
   local toggled_file = M.get_toggle_test_file(current_file)
 
   if file_exists(toggled_file) then
-    vim.cmd(':e ' .. toggled_file, false)
+    vim.cmd(':e ' .. toggled_file)
   else
     local msg = "File doesn't exist. Do you want to '" .. toggled_file .. "'?"
     local response = vim.fn.confirm(msg, '&y\n&n', 1)
 
     if response == 1 then
-      vim.cmd(':e ' .. toggled_file, false)
-      vim.cmd('silent exec "!mkdir -p %:h"', false)
+      vim.cmd(':e ' .. toggled_file)
+      vim.cmd('silent exec "!mkdir -p %:h"')
       vim.cmd('silent :w')
     end
   end
 end
 
 local execute_test = function(arg)
-  if M._state.mix_test_win ~= nil then
+  local win_id = M._state.mix_test_win
+  if win_id ~= nil and vim.api.nvim_win_is_valid(win_id) then
     vim.api.nvim_set_current_win(M._state.mix_test_win)
     vim.cmd('silent :bdelete!')
   end
@@ -100,6 +101,7 @@ local execute_test = function(arg)
   vim.cmd('vsplit')
   vim.cmd(':term mix test ' .. arg)
   local buf = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
   vim.api.nvim_buf_set_option(buf, 'readonly', true)
   vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<CMD>:bdelete<CR>', {})
   vim.api.nvim_buf_set_keymap(buf, 'n', 'i', '', {})
