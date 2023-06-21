@@ -1,30 +1,39 @@
 # potion-maker.nvim
 
-Be an alchemist on vim.
+Be an alchemist on neovim.
 
 ## Intallation
 
-### Using Lazy
+### Using Lazy.nvim
 
 ```lua
-'Matsa59/potion-maker.nvim'
+  {
+    'matsa59/potion-maker.nvim',
+    dev = true,
+    keys = {
+      { "<leader>mfp", "<cmd>PotionMakerFunctionPipe<cr>", desc = "Pipe to function" },
+      { "<leader>mfu", "<cmd>PotionMakerFunctionUnpipe<cr>", desc = "Unpipe from function" },
+      { "<leader>mtt", "<cmd>PotionMakerToggleTestFile<cr>", desc = "Switch between test and source file" },
+      { "<leader>mts", "<cmd>PotionMakerExecuteTestAtCursor<cr>", desc = "Run test at cursor position" },
+      { "<leader>mtS", "<cmd>PotionMakerExecuteTestForCurrentFile<cr>", desc = "Run every test in current file" },
+    },
+  },
 ```
 
-### Using Packer
+### From/To pipe
+
+It requires to bind the lsp client to potion-maker
+
+If you have a custom installation you can do:
 
 ```lua
-use { 'Matsa59/potion-maker.nvim' }
+require('lspconfig').elixirls.setup {
+  capabilities = capabilities,
+  cmd = { server_config.elixirls..'/language_server.sh' },
+  on_attach = function (...)
+    require('potion-maker').on_attach(...)
+    -- your others handlers
+  end
+}
 ```
 
-### Bindings
-
-```vim
-" Switch from your src file and test file (in both ways)
-nmap <leader>mtt :PotionMakerToggleTestFile<CR>
-
-" Execute the test where your cursor is
-nmap <leader>mts :PotionMakerExecuteTestAtCursor<CR>
-
-" Execute every tests of the file you're currently on
-nmap <leader>mtS :PotionMakerExecuteTestForCurrentFile<CR>
-```

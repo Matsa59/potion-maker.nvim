@@ -132,4 +132,31 @@ M.run_test_for_current_file = function()
   execute_test(current_file)
 end
 
+function M.from_pipe()
+  if M._client then
+    require('potion-maker.elixirls').manipulate_pipe("fromPipe", M._client)
+  else
+    print('No lsp client binded')
+  end
+end
+
+function M.to_pipe()
+  if M._client then
+    require('potion-maker.elixirls').manipulate_pipe("toPipe", M._client)
+  else
+    print('No lsp client binded')
+  end
+end
+
+M.on_attach = function (client, bufnr)
+  M._client = client
+  local add_user_cmd = vim.api.nvim_buf_create_user_command
+  add_user_cmd(bufnr, "PotionMakerFunctionUnpipe", function () M.from_pipe() end, {})
+  add_user_cmd(bufnr, "PotionMakerFunctionPipe", function () M.to_pipe() end, {})
+  add_user_cmd(bufnr, 'PotionMakerToggleTestFile', function() M.toggle_test_file() end, {})
+  add_user_cmd(bufnr, 'PotionMakerExecuteTestAtCursor', function() M.run_test_at_cursor() end, {})
+  add_user_cmd(bufnr, 'PotionMakerExecuteTestForCurrentFile', function() M.run_test_for_current_file() end, {})
+end
+
 return M
+
