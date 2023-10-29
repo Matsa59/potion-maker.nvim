@@ -9,7 +9,6 @@ Be an alchemist on neovim.
 ```lua
   {
     'matsa59/potion-maker.nvim',
-    dev = true,
     keys = {
       { "<leader>mfp", "<cmd>PotionMakerFunctionPipe<cr>", desc = "Pipe to function" },
       { "<leader>mfu", "<cmd>PotionMakerFunctionUnpipe<cr>", desc = "Unpipe from function" },
